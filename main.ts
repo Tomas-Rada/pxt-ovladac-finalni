@@ -1,67 +1,57 @@
+// Hodnoty souřadnic z gyroskopu
+// to do
+input.onButtonPressed(Button.A, function () {
+    radio.sendValue("njimok@<>", control.deviceSerialNumber())
+})
+let y_l = 0
+let x_l = 0
+let y = 0
+let x = 0
+
 radio.setGroup(234)
 radio.setFrequencyBand(54)
+radio.setTransmitSerialNumber(true)
+basic.forever(function () {
 
 
-// Příjmání
-radio.onReceivedValue(function (name: string, value: number) {
-    if (name === "38621479X") {
-        value = x
+    x = input.acceleration(Dimension.X)
+    y = input.acceleration(Dimension.Y)
+    // Kontrola osy X
+    // to do
+    if (x > 100) {
+        x_l = 3
+    } else if (x > 60) {
+        x_l = 2
+    } else if (x > 30) {
+        x_l = 1
+    } else if (x > 0 && x < 0) {
+        x_l = 0
+    } else if (x < -100) {
+        x_l = -3
+    } else if (x < -60) {
+        x_l = -2
+    } else if (x < -30) {
+        x_l = -1
     }
-    if (name === "38621479Y") {
-        value = y
+
+    // Kontrola osy Y
+    // to do
+    if (y > 100) {
+        x_l = 3
+    } else if (y > 60) {
+        x_l = 2
+    } else if (y > 30) {
+        x_l = 1
+    } else if (y > 0 && y < 0) {
+        x_l = 0
+    } else if (y < -100) {
+        x_l = -3
+    } else if (y < -60) {
+        x_l = -2
+    } else if (y < -30) {
+        x_l = -1
     }
+    radio.sendValue("y", y_l)
+    radio.sendValue("x", x_l)
+    basic.pause(20)
 })
-let x: number = 0
-let y: number = 0
-let p_motor: number = 0
-let l_motor: number = 0
-
-// Kontrola osy X
-if (x > 100) {
-    console.log("x je větší než 100");
-} else if (x > 50) {
-    console.log("x je mezi 50 a 100");
-} else if (x > 20) {
-    console.log("x je mezi 20 a 50");
-} else if (x > 10) {
-    console.log("x je mezi 10 a 20");
-} else if (x > 0) {
-    console.log("x je mezi 0 a 10");
-} else if (x < -100) {
-    console.log("x je menší než -100");
-} else if (x < -50) {
-    console.log("x je mezi -100 a -50");
-} else if (x < -20) {
-    console.log("x je mezi -50 a -20");
-} else if (x < -10) {
-    console.log("x je mezi -20 a -10");
-} else if (x < 0) {
-    console.log("x je mezi -10 a 0");
-} else {
-    console.log("x je rovno 0");
-}
-
-// Kontrola osy Y
-if (y > 100) {
-    console.log("y je větší než 100");
-} else if (y > 50) {
-    console.log("y je mezi 50 a 100");
-} else if (y > 20) {
-    console.log("y je mezi 20 a 50");
-} else if (y > 10) {
-    console.log("y je mezi 10 a 20");
-} else if (y > 0) {
-    console.log("y je mezi 0 a 10");
-} else if (y < -100) {
-    console.log("y je menší než -100");
-} else if (y < -50) {
-    console.log("y je mezi -100 a -50");
-} else if (y < -20) {
-    console.log("y je mezi -50 a -20");
-} else if (y < -10) {
-    console.log("y je mezi -20 a -10");
-} else if (y < 0) {
-    console.log("y je mezi -10 a 0");
-} else {
-    console.log("y je rovno 0");
-}
