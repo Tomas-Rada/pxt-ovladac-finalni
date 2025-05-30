@@ -2,11 +2,6 @@ radio.setGroup(234)
 radio.setFrequencyBand(54)
 
 
-// Kalibrace gyroskopu
-console.log("Kalibrace gyroskopu...");
-//to do
-console.log("Kalibrace dokončena!");
-
 // Příjmání
 radio.onReceivedValue(function (name: string, value: number) {
     if (name === "38621479X") {
